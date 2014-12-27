@@ -1,0 +1,37 @@
+// Under Construction
+// Adapted from http://blog.abhijeetr.com/2012/03/chromium-extension-reddit-all-comments.html
+
+
+var i = 1;
+
+var comments = document.getElementsByClassName('morecomments');
+
+  console.log(comments.length);
+  if (comments.length == 0 || comments == null) {
+    console.log('No Comments to Expand');
+  } 
+  else {
+    i = expand_comment(comments[0]);
+  }
+  
+
+
+function expand_comment(comment_elm) {
+  var first_button = comment_elm.getElementsByClassName('button') [0];
+  if (comment_elm == null) {
+    alert('Sorry, no comments to expand');
+    return 0;
+  }
+  if (first_button.innerHTML == 'loading...') {
+    first_button.className = ''; //To fix later
+    console.log('ERROR: Loading ' + i);
+    return -1;
+  } 
+  else {
+    var theEvent = document.createEvent('MouseEvent');
+    theEvent.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    first_button.dispatchEvent(theEvent);
+    console.log('Expand comments: ' + i);
+    return 1;
+  }
+}
